@@ -1,0 +1,15 @@
+{%extends 'base.html'%} <br />
+{%block title%}Update Post{%endblock title%}
+<br />
+{%block content%} {%if user.is_authenticated%}{%if user.id == post.author.id%}
+
+<div class="container">
+  <h1>Update Post</h1>
+  <form method="post" enctype="multipart/form-data">
+    {%csrf_token%} {{form.media}}{{form.as_p}}
+    <button class="btn btn-secondary">Update</button>
+  </form>
+</div>
+{%else%}
+<h1>You are not allowed here and you know it ...</h1>
+{%endif%}{%endif%} {%endblock content%}

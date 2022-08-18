@@ -1,0 +1,16 @@
+{%extends 'base.html'%} <br />
+{%block title%}Create new Profile Page{%endblock title%}
+<br />
+{%block content%} {%if user.is_authenticated%}
+
+<div class="container">
+  <h1>Create Profile Page</h1>
+  <form method="post" enctype="multipart/form-data">
+    {%csrf_token%}{{form.as_p}}
+    <button class="btn btn-secondary">Create Profile Page</button>
+  </form>
+</div>
+
+{%else%}
+<h1>You are not allowed her and you know it ...</h1>
+{%endif%} {%endblock content%}

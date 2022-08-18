@@ -1,0 +1,12 @@
+{%extends 'base.html'%} <br />
+{%block title%}Register{%endblock title%}
+<br />
+{%block content%}
+<div class="container">
+  <h1>Register</h1>
+  <form method="post">
+    {%csrf_token%} {{form.as_p}}
+    <button class="btn btn-secondary">Register</button>
+  </form>
+</div>
+{%endblock content%}

@@ -1,0 +1,36 @@
+{%extends 'base.html'%} {%block content%}
+<h1>Blogs</h1>
+{%for post in object_list%}
+<div class="card mb-3" style="box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      {%if post.header_image%}
+
+      <img src="{{post.header_image.url}}" class="img-fluid rounded-start w-100 h-100" alt="..." />
+      {%endif%}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <div class=" d-flex justify-content-between">
+
+          <h5 class="card-title text-capitalize">{{post.title}}</h5>
+          <a href="{% url 'article-detail' post.pk %}" class="card-title text-capitalize">{{post.category}}</a>
+        </div <p class="card-text">{{post.snippet | truncatewords:60|safe}}...</p>
+        <a href="{% url 'article-detail' post.pk %}" class="btn btn-secondary">Read More..</a>
+        <p class="card-text mt-4 text-capitalize">
+          <small class="text-muted">{{post.author.first_name}} {{post.author.last_name}} :
+            {{post.post_date}}</small>
+          {%if user.is_authenticated%} {%if user.id == post.author.id%}
+        <div class="d-flex justify-content-end">
+          <a class="px-4 text-primary" href="{%url 'update_post' post.pk%}"><i
+              class="fas fa-edit text-black fa-lg"></i></a>
+          <a class="px-4 text-danger" href="{%url 'delete_post' post.pk%}"><i class="fas fa-trash fa-lg"></i></a>
+        </div>
+        {%endif%} {%endif%}
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+{%endfor%} {%endblock content%}
